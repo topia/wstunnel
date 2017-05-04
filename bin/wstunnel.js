@@ -70,6 +70,7 @@ module.exports = (Server, Client) => {
         localAddr = `${toks[0]}:${toks[1]}`
         remoteAddr = `${toks[2]}:${toks[3]}`
       } else if (toks.length === 3) {
+        remoteAddr = `${toks[1]}:${toks[2]}`;
         if (toks[0] === 'stdio') {
           client.startStdio(wsHostUrl, remoteAddr, {'x-wstclient': machineId}, (err) => {
             if (err) {
@@ -80,7 +81,6 @@ module.exports = (Server, Client) => {
           return
         } else {
           localAddr = `${DefaultLocalAddr}:${toks[0]}`
-          remoteAddr = `${toks[1]}:${toks[2]}`
         }
       } else if (toks.length === 1) {
         localAddr = `${DefaultLocalAddr}:${toks[0]}`
