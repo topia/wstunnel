@@ -31,6 +31,10 @@ module.exports = (Server, Client) => {
     .alias('t', "tunnel")
     .boolean('c')
     .boolean('http')
+    .boolean('wsreconnect')
+    .string('wssessionid')  // for debug
+    .string('wssecret')  // for debug
+    .default('wstimeout', 60*60*24*1)  // one day
     .alias('c', 'anycert')
     .default('c', false)
     .describe('s', 'run as server, listen on [localip:]localport, default localip is 127.0.0.1')
@@ -47,6 +51,9 @@ module.exports = (Server, Client) => {
     } else {
       server = new Server()
     }
+    if (argv.wsreconnect) {
+      server.setWsReconnTimeout(argv.wstimeout)
+    }
     server.start(argv.s, (err) => err ? console.log(` Server is listening on ${argv.s}`) : null)
   } else if (argv.t) {
   // client mode
@@ -57,6 +64,15 @@ module.exports = (Server, Client) => {
       let client = new Client()
       if (argv.http) {
         client.setHttpOnly(true)
+      }
+      if (argv.wsreconnect) {
+        client.setWsReconnTimeout(argv.wstimeout);
+      }
+      if (argv.wssessionid) {
+        client.setWsSessionId(argv.wssessionid);
+      }
+      if (argv.wssecret) {
+        client.setWsSecret(argv.wssecret);
       }
 
       let wsHostUrl = argv._[0]
