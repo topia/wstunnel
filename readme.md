@@ -43,6 +43,14 @@ To get help, just run
 
     wstunnel
 
+## reconnection support
+
+With websocket, this code supports reconnection over network changes.
+To enable this, add `--wsreconnect` argument to both side(client/server).
+clients automatically reconnect after network interruption.
+
+**CAVEATS**: this feature uses session id/secret to negotiation. In nature of this function, **SSL setup is strongly recommended**. your connection will be stolen when another person knows session id/secret.
+
 ## Use cases
 
 For tunneling over strict firewalls: WebSocket is a part of the HTML5 standard, any reasonable firewall will unlikely
