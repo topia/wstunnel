@@ -51,6 +51,18 @@ clients automatically reconnect after network interruption.
 
 **CAVEATS**: this feature uses session id/secret to negotiation. In nature of this function, **SSL setup is strongly recommended**. your connection will be stolen when another person knows session id/secret.
 
+example .ssh/config entry for continuous ssh session:
+
+```
+Host some-host-to-ssh
+ProxyCommand path/to/wstunnel/bin/wstt.js --wsreconnect -t stdio:%h:%p wss://host/path/to/websocket
+ServerAliveCountMax 24
+ServerAliveInterval 300
+# 300sec(5min) * 24 = 120min = 2hours
+```
+
+server side simply `node path/to/wstunnel/bin/wstt.js --wsreconnect -s 8080 -t localhost:22` and use apache or nginx to SSL tunneling.
+
 ## Use cases
 
 For tunneling over strict firewalls: WebSocket is a part of the HTML5 standard, any reasonable firewall will unlikely
