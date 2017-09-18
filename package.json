@@ -1,16 +1,15 @@
 {
   "name": "wstunnel",
-  "version": "1.2.0",
-  "description": "tcp tunnel over websocket",
+  "version": "1.2.2",
+  "description": "tunnel over websocket",
   "main": "./lib/wst.js",
   "scripts": {
     "test": "nodeunit test/test.js",
     "testssh": "nodeunit test/testssh.js",
-    "decaffeinate" : "decaffeinate --keep-commonjs --prefer-const **/*.coffee"
+    "decaffeinate": "decaffeinate --keep-commonjs --prefer-const **/*.coffee"
   },
   "repository": "https://github.com/mhzed/wstunnel",
   "author": {
-    "url": "http://mhzed.com",
     "email": "mhzedd@gmail.com"
   },
   "homepage": "https://github.com/mhzed/wstunnel",
@@ -20,11 +19,11 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": "~0.10.21"
+    "node": "*"
   },
   "dependencies": {
     "lawg": "1.0.3",
-    "machine-uuid": "1.0.7",
+    "machine-uuid": "^1.0.10",
     "node-uuid": "1.4.1",
     "optimist": "0.3.5",
     "phuture": "1.0.2",
